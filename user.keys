@@ -1,1 +1,3 @@
-
+local keys = {
+"1234" = "Akaccount53"
+}
