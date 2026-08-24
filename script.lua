@@ -11,7 +11,10 @@ local MAIN_URL = "https://pastebin.com/raw/bu1x0pXv"
 
 --// Prevent duplicate GUIs
 pcall(function()
-    game:GetService("CoreGui"):FindFirstChild("KeySystem"):Destroy()
+    local oldGui = game:GetService("CoreGui"):FindFirstChild("KeySystem")
+    if oldGui then
+        oldGui:Destroy()
+    end
 end)
 
 --//==================================================
@@ -58,7 +61,6 @@ local function verifyKey(inputKey)
 
     inputKey = tostring(inputKey or "")
 
-    -- Remove accidental spaces
     inputKey = inputKey:gsub("^%s+", "")
     inputKey = inputKey:gsub("%s+$", "")
 
@@ -75,10 +77,8 @@ local function verifyKey(inputKey)
     local userId = tostring(LocalPlayer.UserId)
     local username = LocalPlayer.Name
 
-    -- Try UserId first
     local account = keys[userId]
 
-    -- Then try username
     if not account then
         account = keys[username]
     end
@@ -91,15 +91,12 @@ local function verifyKey(inputKey)
         return false, "Invalid key database entry."
     end
 
-    -- Check key
     if tostring(account.key) ~= inputKey then
         return false, "Invalid key."
     end
 
-    -- Check expiration
     local expires = tonumber(account.expires) or 0
 
-    -- 0 = permanent
     if expires ~= 0 then
 
         local currentTime = os.time()
@@ -129,183 +126,275 @@ if not gui.Parent then
     gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
 end
 
---// Main window
+--//==================================================
+--// COLORS
+--//==================================================
+
+local COLORS = {
+    Background = Color3.fromRGB(14, 15, 17),
+    Panel = Color3.fromRGB(17, 18, 21),
+    PanelLight = Color3.fromRGB(21, 22, 26),
+
+    Border = Color3.fromRGB(34, 35, 42),
+    BorderHover = Color3.fromRGB(65, 59, 105),
+
+    Purple = Color3.fromRGB(126, 111, 235),
+    PurpleLight = Color3.fromRGB(143, 127, 245),
+    PurpleDark = Color3.fromRGB(88, 77, 165),
+
+    Text = Color3.fromRGB(235, 234, 242),
+    TextSecondary = Color3.fromRGB(145, 143, 155),
+    TextMuted = Color3.fromRGB(92, 91, 102),
+
+    Error = Color3.fromRGB(235, 95, 105),
+    Success = Color3.fromRGB(105, 210, 145),
+}
+
+--//==================================================
+--// MAIN WINDOW
+--//==================================================
+
 local frame = Instance.new("Frame")
 frame.Name = "Main"
 frame.Size = UDim2.fromOffset(390, 245)
 frame.Position = UDim2.fromScale(0.5, 0.5)
 frame.AnchorPoint = Vector2.new(0.5, 0.5)
-frame.BackgroundColor3 = Color3.fromRGB(20, 20, 24)
+frame.BackgroundColor3 = COLORS.Background
 frame.BorderSizePixel = 0
 frame.Parent = gui
 
 local frameCorner = Instance.new("UICorner")
-frameCorner.CornerRadius = UDim.new(0, 14)
+frameCorner.CornerRadius = UDim.new(0, 7)
 frameCorner.Parent = frame
 
 local frameStroke = Instance.new("UIStroke")
-frameStroke.Color = Color3.fromRGB(55, 55, 65)
+frameStroke.Color = COLORS.Border
 frameStroke.Thickness = 1
-frameStroke.Transparency = 0.2
+frameStroke.Transparency = 0
 frameStroke.Parent = frame
 
---// Top bar
+--// Subtle purple accent line
+local accentLine = Instance.new("Frame")
+accentLine.Name = "Accent"
+accentLine.Size = UDim2.new(0, 2, 1, -20)
+accentLine.Position = UDim2.fromOffset(0, 10)
+accentLine.BackgroundColor3 = COLORS.Purple
+accentLine.BorderSizePixel = 0
+accentLine.Parent = frame
+
+local accentCorner = Instance.new("UICorner")
+accentCorner.CornerRadius = UDim.new(1, 0)
+accentCorner.Parent = accentLine
+
+--//==================================================
+--// TOP BAR
+--//==================================================
+
 local topBar = Instance.new("Frame")
 topBar.Name = "TopBar"
 topBar.Size = UDim2.new(1, 0, 0, 52)
-topBar.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+topBar.BackgroundColor3 = COLORS.Panel
 topBar.BorderSizePixel = 0
 topBar.Parent = frame
 
 local topCorner = Instance.new("UICorner")
-topCorner.CornerRadius = UDim.new(0, 14)
+topCorner.CornerRadius = UDim.new(0, 7)
 topCorner.Parent = topBar
 
--- Cover bottom rounded corners of top bar
 local topCover = Instance.new("Frame")
-topCover.Size = UDim2.new(1, 0, 0, 15)
-topCover.Position = UDim2.new(0, 0, 1, -15)
-topCover.BackgroundColor3 = Color3.fromRGB(25, 25, 30)
+topCover.Size = UDim2.new(1, 0, 0, 10)
+topCover.Position = UDim2.new(0, 0, 1, -10)
+topCover.BackgroundColor3 = COLORS.Panel
 topCover.BorderSizePixel = 0
 topCover.Parent = topBar
+
+--// Purple section indicator
+local sectionIndicator = Instance.new("Frame")
+sectionIndicator.Size = UDim2.fromOffset(3, 24)
+sectionIndicator.Position = UDim2.fromOffset(15, 14)
+sectionIndicator.BackgroundColor3 = COLORS.Purple
+sectionIndicator.BorderSizePixel = 0
+sectionIndicator.Parent = topBar
+
+local sectionCorner = Instance.new("UICorner")
+sectionCorner.CornerRadius = UDim.new(1, 0)
+sectionCorner.Parent = sectionIndicator
 
 --// Title
 local title = Instance.new("TextLabel")
 title.BackgroundTransparency = 1
-title.Position = UDim2.fromOffset(18, 7)
-title.Size = UDim2.new(1, -75, 0, 22)
-title.Font = Enum.Font.GothamBold
+title.Position = UDim2.fromOffset(28, 7)
+title.Size = UDim2.new(1, -80, 0, 22)
+title.Font = Enum.Font.GothamMedium
 title.Text = "Key Verification"
-title.TextColor3 = Color3.fromRGB(245, 245, 250)
-title.TextSize = 17
+title.TextColor3 = COLORS.Text
+title.TextSize = 15
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = topBar
 
 --// Subtitle
 local subtitle = Instance.new("TextLabel")
 subtitle.BackgroundTransparency = 1
-subtitle.Position = UDim2.fromOffset(19, 28)
-subtitle.Size = UDim2.new(1, -80, 0, 18)
+subtitle.Position = UDim2.fromOffset(28, 28)
+subtitle.Size = UDim2.new(1, -80, 0, 17)
 subtitle.Font = Enum.Font.Gotham
 subtitle.Text = "Enter your access key to continue"
-subtitle.TextColor3 = Color3.fromRGB(145, 145, 155)
-subtitle.TextSize = 11
+subtitle.TextColor3 = COLORS.TextMuted
+subtitle.TextSize = 10
 subtitle.TextXAlignment = Enum.TextXAlignment.Left
 subtitle.Parent = topBar
 
---// Close button
+--//==================================================
+--// CLOSE BUTTON
+--//==================================================
+
 local closeButton = Instance.new("TextButton")
 closeButton.Name = "Close"
-closeButton.Size = UDim2.fromOffset(34, 34)
-closeButton.Position = UDim2.new(1, -43, 0, 9)
-closeButton.BackgroundColor3 = Color3.fromRGB(40, 40, 47)
+closeButton.Size = UDim2.fromOffset(27, 27)
+closeButton.Position = UDim2.new(1, -36, 0, 13)
+closeButton.BackgroundColor3 = COLORS.PanelLight
 closeButton.BorderSizePixel = 0
 closeButton.Text = "×"
-closeButton.Font = Enum.Font.GothamMedium
-closeButton.TextSize = 22
-closeButton.TextColor3 = Color3.fromRGB(220, 220, 225)
+closeButton.Font = Enum.Font.Gotham
+closeButton.TextSize = 18
+closeButton.TextColor3 = COLORS.TextSecondary
 closeButton.AutoButtonColor = false
 closeButton.Parent = topBar
 
 local closeCorner = Instance.new("UICorner")
-closeCorner.CornerRadius = UDim.new(0, 9)
+closeCorner.CornerRadius = UDim.new(0, 5)
 closeCorner.Parent = closeButton
 
+local closeStroke = Instance.new("UIStroke")
+closeStroke.Color = COLORS.Border
+closeStroke.Thickness = 1
+closeStroke.Parent = closeButton
+
 closeButton.MouseEnter:Connect(function()
-    closeButton.BackgroundColor3 = Color3.fromRGB(65, 38, 42)
-    closeButton.TextColor3 = Color3.fromRGB(255, 120, 125)
+    closeButton.BackgroundColor3 = Color3.fromRGB(38, 29, 43)
+    closeButton.TextColor3 = COLORS.Error
+    closeStroke.Color = Color3.fromRGB(75, 43, 55)
 end)
 
 closeButton.MouseLeave:Connect(function()
-    closeButton.BackgroundColor3 = Color3.fromRGB(40, 40, 47)
-    closeButton.TextColor3 = Color3.fromRGB(220, 220, 225)
+    closeButton.BackgroundColor3 = COLORS.PanelLight
+    closeButton.TextColor3 = COLORS.TextSecondary
+    closeStroke.Color = COLORS.Border
 end)
 
 closeButton.MouseButton1Click:Connect(function()
     gui:Destroy()
 end)
 
---// Key textbox
+--//==================================================
+--// KEY INPUT
+--//==================================================
+
 local input = Instance.new("TextBox")
 input.Name = "KeyInput"
-input.Size = UDim2.new(1, -36, 0, 48)
-input.Position = UDim2.fromOffset(18, 73)
-input.BackgroundColor3 = Color3.fromRGB(29, 29, 35)
+input.Size = UDim2.new(1, -36, 0, 43)
+input.Position = UDim2.fromOffset(18, 72)
+input.BackgroundColor3 = COLORS.Panel
 input.BorderSizePixel = 0
 input.ClearTextOnFocus = false
 input.PlaceholderText = "Enter your key..."
-input.PlaceholderColor3 = Color3.fromRGB(105, 105, 115)
+input.PlaceholderColor3 = COLORS.TextMuted
 input.Text = ""
-input.TextColor3 = Color3.fromRGB(235, 235, 240)
+input.TextColor3 = COLORS.Text
 input.Font = Enum.Font.Gotham
-input.TextSize = 14
+input.TextSize = 12
+input.TextXAlignment = Enum.TextXAlignment.Left
 input.Parent = frame
 
+local inputPadding = Instance.new("UIPadding")
+inputPadding.PaddingLeft = UDim.new(0, 13)
+inputPadding.PaddingRight = UDim.new(0, 13)
+inputPadding.Parent = input
+
 local inputCorner = Instance.new("UICorner")
-inputCorner.CornerRadius = UDim.new(0, 10)
+inputCorner.CornerRadius = UDim.new(0, 5)
 inputCorner.Parent = input
 
 local inputStroke = Instance.new("UIStroke")
-inputStroke.Color = Color3.fromRGB(50, 50, 60)
+inputStroke.Color = COLORS.Border
 inputStroke.Thickness = 1
 inputStroke.Parent = input
 
 input.Focused:Connect(function()
-    inputStroke.Color = Color3.fromRGB(100, 100, 110)
+    inputStroke.Color = COLORS.Purple
+    input.BackgroundColor3 = Color3.fromRGB(20, 20, 24)
 end)
 
 input.FocusLost:Connect(function()
-    inputStroke.Color = Color3.fromRGB(50, 50, 60)
+    inputStroke.Color = COLORS.Border
+    input.BackgroundColor3 = COLORS.Panel
 end)
 
---// Verify button
+--//==================================================
+--// VERIFY BUTTON
+--//==================================================
+
 local verifyButton = Instance.new("TextButton")
 verifyButton.Name = "Verify"
-verifyButton.Size = UDim2.new(1, -36, 0, 45)
-verifyButton.Position = UDim2.fromOffset(18, 131)
-verifyButton.BackgroundColor3 = Color3.fromRGB(65, 105, 255)
+verifyButton.Size = UDim2.new(1, -36, 0, 40)
+verifyButton.Position = UDim2.fromOffset(18, 124)
+verifyButton.BackgroundColor3 = COLORS.PurpleDark
 verifyButton.BorderSizePixel = 0
 verifyButton.Text = "Verify Key"
-verifyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-verifyButton.Font = Enum.Font.GothamBold
-verifyButton.TextSize = 14
+verifyButton.TextColor3 = COLORS.Text
+verifyButton.Font = Enum.Font.GothamMedium
+verifyButton.TextSize = 12
 verifyButton.AutoButtonColor = false
 verifyButton.Parent = frame
 
 local verifyCorner = Instance.new("UICorner")
-verifyCorner.CornerRadius = UDim.new(0, 10)
+verifyCorner.CornerRadius = UDim.new(0, 5)
 verifyCorner.Parent = verifyButton
 
+local verifyStroke = Instance.new("UIStroke")
+verifyStroke.Color = COLORS.Purple
+verifyStroke.Thickness = 1
+verifyStroke.Transparency = 0.45
+verifyStroke.Parent = verifyButton
+
 verifyButton.MouseEnter:Connect(function()
-    verifyButton.BackgroundColor3 = Color3.fromRGB(80, 120, 255)
+    verifyButton.BackgroundColor3 = COLORS.Purple
+    verifyStroke.Transparency = 0.1
 end)
 
 verifyButton.MouseLeave:Connect(function()
-    verifyButton.BackgroundColor3 = Color3.fromRGB(65, 105, 255)
+    verifyButton.BackgroundColor3 = COLORS.PurpleDark
+    verifyStroke.Transparency = 0.45
 end)
 
---// Status
+--//==================================================
+--// STATUS
+--//==================================================
+
 local status = Instance.new("TextLabel")
 status.Name = "Status"
 status.BackgroundTransparency = 1
-status.Position = UDim2.fromOffset(18, 185)
-status.Size = UDim2.new(1, -36, 0, 22)
+status.Position = UDim2.fromOffset(18, 174)
+status.Size = UDim2.new(1, -36, 0, 20)
 status.Font = Enum.Font.Gotham
 status.Text = "Waiting for key..."
-status.TextColor3 = Color3.fromRGB(135, 135, 145)
-status.TextSize = 12
+status.TextColor3 = COLORS.TextMuted
+status.TextSize = 10
 status.TextXAlignment = Enum.TextXAlignment.Center
 status.Parent = frame
 
---// User information
+--//==================================================
+--// USER INFORMATION
+--//==================================================
+
 local userLabel = Instance.new("TextLabel")
 userLabel.BackgroundTransparency = 1
-userLabel.Position = UDim2.fromOffset(18, 212)
-userLabel.Size = UDim2.new(1, -36, 0, 20)
+userLabel.Position = UDim2.fromOffset(18, 204)
+userLabel.Size = UDim2.new(1, -36, 0, 18)
 userLabel.Font = Enum.Font.Gotham
 userLabel.Text = "User: " .. LocalPlayer.Name
-userLabel.TextColor3 = Color3.fromRGB(90, 90, 100)
-userLabel.TextSize = 10
+userLabel.TextColor3 = Color3.fromRGB(76, 75, 84)
+userLabel.TextSize = 9
 userLabel.TextXAlignment = Enum.TextXAlignment.Center
 userLabel.Parent = frame
 
@@ -374,20 +463,20 @@ local function performVerification()
     checking = true
 
     verifyButton.Text = "Checking..."
-    verifyButton.BackgroundColor3 = Color3.fromRGB(50, 80, 190)
+    verifyButton.BackgroundColor3 = Color3.fromRGB(61, 53, 116)
 
     status.Text = "Connecting to key server..."
-    status.TextColor3 = Color3.fromRGB(160, 160, 170)
+    status.TextColor3 = COLORS.TextSecondary
 
     local valid, message = verifyKey(input.Text)
 
     if not valid then
 
         status.Text = message
-        status.TextColor3 = Color3.fromRGB(255, 105, 110)
+        status.TextColor3 = COLORS.Error
 
         verifyButton.Text = "Verify Key"
-        verifyButton.BackgroundColor3 = Color3.fromRGB(65, 105, 255)
+        verifyButton.BackgroundColor3 = COLORS.PurpleDark
 
         checking = false
         return
@@ -395,10 +484,10 @@ local function performVerification()
 
     -- Success
     status.Text = "✓ Key verified!"
-    status.TextColor3 = Color3.fromRGB(100, 220, 145)
+    status.TextColor3 = COLORS.Success
 
     verifyButton.Text = "Verified"
-    verifyButton.BackgroundColor3 = Color3.fromRGB(50, 160, 100)
+    verifyButton.BackgroundColor3 = Color3.fromRGB(55, 125, 87)
 
     task.wait(0.7)
 
