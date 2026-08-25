@@ -11,10 +11,6 @@ local keys = {
         key = "HIKIDS",
         expires = 0
     },
-    ["11573100297"] = {
-        key = "TESTING",
-        expires = 1787665170
-    },
 }
 
 return keys
