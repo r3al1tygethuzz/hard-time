@@ -7,6 +7,10 @@ local keys = {
         key = "HELLO",
         expires = 0
     },
+    ["11570628921"] = {
+        key = "HIKIDS",
+        expires = 0
+    },
 }
 
 return keys
