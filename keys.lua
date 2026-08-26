@@ -19,6 +19,10 @@ local keys = {
         key = "HIKIDS",
         expires = 0
     },
+    ["123134123131414"] = {
+        key = "GLQK-AR7V-9LAH-62ZR",
+        expires = 1787702756
+    },
 }
 
 return keys
