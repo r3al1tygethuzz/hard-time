@@ -1,4 +1,8 @@
 local keys = {
+    ["123"] = {
+        key = "QA28-LESN-HBNJ-KMYR",
+        expires = 1787870903
+    },
     ["23243"] = {
         key = "test",
         expires = 0
