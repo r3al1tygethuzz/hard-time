@@ -1,4 +1,8 @@
 local keys = {
+    ["23243"] = {
+        key = "test",
+        expires = 0
+    },
     ["1730697990"] = {
         key = "4BSE-YGNJ-Q9YG-VDHB",
         expires = 2103206365
