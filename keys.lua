@@ -11,6 +11,10 @@ local keys = {
         key = "AUVT-KJLY-CJR3-ACVW",
         expires = 1787890916
     },
+    ["11584154312"] = {
+        key = "ZEUS",
+        expires = 1787891307
+    },
 }
 
 return keys
