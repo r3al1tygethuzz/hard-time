@@ -7,6 +7,10 @@ local keys = {
         key = "6BF9-HR8D-P6T3-6A88",
         expires = 1787890848
     },
+    ["9459252735"] = {
+        key = "AUVT-KJLY-CJR3-ACVW",
+        expires = 1787890916
+    },
 }
 
 return keys
