@@ -11,6 +11,10 @@ local keys = {
         key = "rollex",
         expires = 0
     },
+    ["11592425232"] = {
+        key = "dontdelete",
+        expires = 0
+    },
 }
 
 return keys
