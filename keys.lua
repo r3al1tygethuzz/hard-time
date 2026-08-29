@@ -3,6 +3,10 @@ local keys = {
         key = "tuffboi",
         expires = 0
     },
+    ["11555262294"] = {
+        key = "2P5P-V85D-HLYR-FXWQ",
+        expires = 1790633011
+    },
     ["11591884598"] = {
         key = "tuffboi",
         expires = 0
