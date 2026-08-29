@@ -12,7 +12,7 @@ local keys = {
         expires = 0
     },
     ["11592425232"] = {
-        key = "dontdelete",
+        key = "hey",
         expires = 0
     },
 }
