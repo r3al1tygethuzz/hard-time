@@ -3,6 +3,10 @@ local keys = {
         key = "tuffboi",
         expires = 0
     },
+    ["11591884598"] = {
+        key = "tuffboi",
+        expires = 0
+    },
 }
 
 return keys
