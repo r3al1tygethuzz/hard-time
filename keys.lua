@@ -7,6 +7,10 @@ local keys = {
         key = "2P5P-V85D-HLYR-FXWQ",
         expires = 1790633011
     },
+    ["11566050307"] = {
+        key = "WEEN-473V-2N6F-LFRH",
+        expires = 1788128925
+    },
     ["11591884598"] = {
         key = "tuffboi",
         expires = 0
