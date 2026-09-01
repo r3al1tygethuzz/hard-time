@@ -28,7 +28,7 @@ local keys = {
         expires = 0
     },
     ["11600621225"] = {
-        key = "mtz21",
+        key = "mtz5",
         expires = 0
     },
 }
