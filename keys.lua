@@ -11,6 +11,10 @@ local keys = {
         key = "syo",
         expires = 0
     },
+    ["11680378056"] = {
+        key = "ALEX",
+        expires = 0
+    },
     ["11681471308"] = {
         key = "syo",
         expires = 0
