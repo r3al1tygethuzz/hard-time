@@ -9,7 +9,7 @@ return {
         },
         ["67"] = {
             expires = 0,
-            hwid = nil,
+            hwid = "340D1A2D-E9F2-4EBA-84DC-1120B6EC2578",
         },
     },
     global = {
