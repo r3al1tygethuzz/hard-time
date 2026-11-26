@@ -16,7 +16,5 @@ local globalKeys = {
     },
 }
 
-return {
-    keys,
-    globalKeys
-]
+return keys
+return globalKeys
