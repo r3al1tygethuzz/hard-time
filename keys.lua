@@ -11,6 +11,10 @@ return {
             expires = 1795801472,
             hwid = nil,
         },
+        ["M6BM-KNMD-NRQP-V2QC"] = {
+            expires = 1795804980,
+            hwid = nil,
+        },
     },
     global = {
     },
