@@ -11,6 +11,9 @@ local globalKeys = {
     ["westly"] = {
         expires = 0
     },
+    ["sonned"] = {
+        expires = 2
+    },
 }
 
 return {
