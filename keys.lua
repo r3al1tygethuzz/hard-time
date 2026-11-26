@@ -17,6 +17,6 @@ local globalKeys = {
 }
 
 return {
-    keys
+    keys,
     globalKeys
 ]
