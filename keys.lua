@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["GR23-FPMH-ZJ39-PBHM"] = {
+            expires = 1795680783,
+            hwid = nil,
+        },
         ["3F6F-UNM9-S53J-7SSS"] = {
             expires = 1795761043,
             hwid = nil,
