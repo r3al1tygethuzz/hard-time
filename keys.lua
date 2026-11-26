@@ -17,8 +17,5 @@ return {
         },
     },
     global = {
-        ["westly"] = {
-            expires = 0,
-        },
     },
 }
