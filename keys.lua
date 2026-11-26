@@ -7,6 +7,10 @@ return {
             expires = 1795764359,
             hwid = "340D1A2D-E9F2-4EBA-84DC-1120B6EC2578",
         },
+        ["HQNS-B56P-DKJJ-Q96Y"] = {
+            expires = 1795801472,
+            hwid = nil,
+        },
     },
     global = {
     },
