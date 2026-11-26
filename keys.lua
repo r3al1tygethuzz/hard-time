@@ -1,22 +1,16 @@
-local keys = {
-    -- Account-specific key (only works for this UserId)
-    ["12058832059"] = {
-        key = "67",
-        expires = 0
-    },
-}
-
-local globalKeys = {
-    -- Universal key (works on ANY account)
-    ["westly"] = {
-        expires = 0
-    },
-    ["sonned"] = {
-        expires = 2
-    },
-}
+-- Nyra Key Database
+-- Managed by the NyraManager Discord bot. Do not edit by hand.
 
 return {
-    users = keys,
-    global = globalKeys
+    keys = {
+        ["67"] = {
+            expires = 0,
+            hwid = nil,
+        },
+    },
+    global = {
+        ["westly"] = {
+            expires = 0,
+        },
+    },
 }
