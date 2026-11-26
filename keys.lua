@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["G5UB-WNVA-8XGL-CBX8"] = {
+            expires = 1795720612,
+            hwid = nil,
+        },
         ["67"] = {
             expires = 1795764359,
             hwid = "340D1A2D-E9F2-4EBA-84DC-1120B6EC2578",
