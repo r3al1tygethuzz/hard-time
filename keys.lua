@@ -15,6 +15,10 @@ return {
             expires = 1795804980,
             hwid = nil,
         },
+        ["VRSH-7QCL-HCSA-39AW"] = {
+            expires = 1795806860,
+            hwid = nil,
+        },
     },
     global = {
     },
