@@ -3,10 +3,6 @@
 
 return {
     keys = {
-        ["ZMEY-EGUU-QVBV-US9B"] = {
-            expires = 1795722984,
-            hwid = nil,
-        },
     },
     global = {
     },
