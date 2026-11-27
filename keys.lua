@@ -9,7 +9,7 @@ return {
         },
         ["76X9-TU89-EJEV-3LZ9"] = {
             expires = 1827347277,
-            hwid = nil,
+            hwid = "06C22951-9B6F-4809-8BA2-6800967A2150",
         },
     },
     global = {
