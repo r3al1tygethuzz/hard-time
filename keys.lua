@@ -5,7 +5,7 @@ return {
     keys = {
         ["WYLT-TVQK-P9U5-L8MQ"] = {
             expires = 1795851791,
-            hwid = nil,
+            hwid = "340D1A2D-E9F2-4EBA-84DC-1120B6EC2578",
         },
     },
     global = {
