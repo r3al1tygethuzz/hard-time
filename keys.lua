@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["WYLT-TVQK-P9U5-L8MQ"] = {
+            expires = 1795851791,
+            hwid = nil,
+        },
     },
     global = {
     },
