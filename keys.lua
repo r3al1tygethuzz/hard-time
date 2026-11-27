@@ -7,6 +7,10 @@ return {
             expires = 1795893680,
             hwid = nil,
         },
+        ["76X9-TU89-EJEV-3LZ9"] = {
+            expires = 1827347277,
+            hwid = nil,
+        },
     },
     global = {
     },
