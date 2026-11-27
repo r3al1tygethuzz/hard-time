@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["WTSC-ZREH-EUG3-D74H"] = {
+            expires = 1795859593,
+            hwid = nil,
+        },
     },
     global = {
     },
