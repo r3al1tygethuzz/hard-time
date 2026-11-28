@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["B783-F4FJ-2V6M-VKJZ"] = {
+            expires = 1798420775,
+            hwid = nil,
+        },
     },
     global = {
     },
