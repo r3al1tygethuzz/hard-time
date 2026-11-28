@@ -11,6 +11,10 @@ return {
             expires = 1798422004,
             hwid = nil,
         },
+        ["KKAB-SBD8-5MQX-RDEX"] = {
+            expires = 1798422436,
+            hwid = nil,
+        },
     },
     global = {
     },
