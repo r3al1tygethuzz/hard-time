@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["WZRR-9SQJ-DPWW-QEHQ"] = {
+            expires = 1795829400,
+            hwid = nil,
+        },
     },
     global = {
     },
