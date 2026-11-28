@@ -17,7 +17,7 @@ return {
         },
         ["KKAB-SBD8-5MQX-RDEX"] = {
             expires = 1798422436,
-            hwid = nil,
+            hwid = "5D268A82-73E2-4470-A1CD-3E6D0BACB0ED",
         },
     },
     global = {
