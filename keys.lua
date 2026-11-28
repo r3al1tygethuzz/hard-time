@@ -9,7 +9,7 @@ return {
         },
         ["TMHJ-Q2L7-SCQG-B9B6"] = {
             expires = 1795916967,
-            hwid = nil,
+            hwid = "340D1A2D-E9F2-4EBA-84DC-1120B6EC2578",
         },
         ["BGPS-DB56-Q59Q-B8LQ"] = {
             expires = 1798422004,
