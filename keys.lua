@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["BGPS-DB56-Q59Q-B8LQ"] = {
+            expires = 1798422004,
+            hwid = nil,
+        },
     },
     global = {
     },
