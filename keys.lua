@@ -3,10 +3,6 @@
 
 return {
     keys = {
-        ["N5T4-MJDK-AD3A-SW5P"] = {
-            expires = 1798430163,
-            hwid = "5D268A82-73E2-4470-A1CD-3E6D0BACB0ED",
-        },
     },
     global = {
     },
