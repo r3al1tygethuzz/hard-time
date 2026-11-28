@@ -3,6 +3,10 @@
 
 return {
     keys = {
+        ["SMHE-KS8L-JZXY-UJA5"] = {
+            expires = 1798278387,
+            hwid = nil,
+        },
     },
     global = {
     },
